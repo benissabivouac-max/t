@@ -24,6 +24,13 @@ before, so the site never shows a broken image.
 
 ## Notes
 
+- **The hero.** `hero.jpg` is the long set table with flowers, shot against the
+  velvet banquette and brick wall. That image carries its own typography — a
+  large `HENI` wordmark and `info@heni.restaurant` — while the hero section
+  also renders the site's own heading, tagline and buttons on top of it. The
+  two sets of text overlap. If that reads badly once it's in, either supply a
+  version of the photo without the overlaid type, or say the word and I'll
+  strip the hero's own text so only the photo's typography shows.
 - **Format.** `.jpg` is what the HTML asks for. To use `.webp` or `.png`
   instead, update the `src` attributes to match.
 - **Cropping.** Every photo is `object-fit: cover`, so it fills its slot and
