@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Heni</title>
+  <meta name="description" content="Contactez le restaurant Heni à Montréal — adresse, heures d'ouverture, téléphone et courriel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-title-fr="Contact — Heni" data-title-en="Contact — Heni">
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">HENI</a>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html"><span class="t-fr">Accueil</span><span class="t-en">Home</span></a>
+        <a href="menu.html"><span class="t-fr">Menu</span><span class="t-en">Menu</span></a>
+        <a href="about.html"><span class="t-fr">À propos</span><span class="t-en">About</span></a>
+        <a href="gallery.html"><span class="t-fr">Galerie</span><span class="t-en">Gallery</span></a>
+        <a href="contact.html" class="is-active"><span class="t-fr">Contact</span><span class="t-en">Contact</span></a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle" id="lang-toggle" type="button">EN</button>
+        <a href="reservations.html" class="btn btn-primary"><span class="t-fr">Réserver</span><span class="t-en">Reserve</span></a>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section--dark section--tight" style="padding-top: calc(var(--header-h) + 2rem);">
+      <div class="container section-head--center">
+        <span class="eyebrow"><span class="t-fr">Nous trouver</span><span class="t-en">Find Us</span></span>
+        <h1>Contact</h1>
+      </div>
+    </section>
+
+    <section class="section--dark" style="padding-top:0;">
+      <div class="container split">
+        <div>
+          <dl class="info-list">
+            <div>
+              <dt><span class="t-fr">Adresse</span><span class="t-en">Address</span></dt>
+              <dd>123 Rue Placeholder<br /><small>Montréal, QC · <span class="t-fr">Adresse à confirmer</span><span class="t-en">Address to be confirmed</span></small></dd>
+            </div>
+            <div>
+              <dt><span class="t-fr">Téléphone</span><span class="t-en">Phone</span></dt>
+              <dd><a href="tel:+15140000000">(514) 000-0000</a></dd>
+            </div>
+            <div>
+              <dt>Courriel</dt>
+              <dd><a href="mailto:bonjour@heni.restaurant">bonjour@heni.restaurant</a></dd>
+            </div>
+            <div>
+              <dt><span class="t-fr">Heures</span><span class="t-en">Hours</span></dt>
+              <dd>17h00 – 22h00
+                <small><span class="t-fr">Mercredi – Samedi</span><span class="t-en">Wednesday – Saturday</span><br />
+                <span class="t-fr">Fermé dimanche et lundi</span><span class="t-en">Closed Sunday and Monday</span></small>
+              </dd>
+            </div>
+          </dl>
+          <div class="social-row">
+            <a href="https://instagram.com/heni.restaurant" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          </div>
+        </div>
+        <div class="ph ph--wood" style="--ph-ratio: 1/1;">
+          <span class="ph-tag">MAP</span>
+          <div class="ph-label">
+            <strong><span class="t-fr">Carte à intégrer</span><span class="t-en">Map to Embed</span></strong>
+            <span class="t-fr">Sera ajoutée une fois l'adresse confirmée</span><span class="t-en">Will be added once the address is confirmed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width: 640px;">
+        <div class="section-head section-head--center">
+          <span class="eyebrow"><span class="t-fr">Écrivez-nous</span><span class="t-en">Write to Us</span></span>
+          <h2><span class="t-fr">Une question, un événement privé ?</span><span class="t-en">A Question, a Private Event?</span></h2>
+        </div>
+
+        <form action="mailto:bonjour@heni.restaurant" method="POST" enctype="text/plain">
+          <div class="field-row">
+            <div class="field">
+              <label for="name"><span class="t-fr">Nom</span><span class="t-en">Name</span></label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="field">
+              <label for="email"><span class="t-fr">Courriel</span><span class="t-en">Email</span></label>
+              <input type="email" id="email" name="email" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="subject"><span class="t-fr">Sujet</span><span class="t-en">Subject</span></label>
+            <input type="text" id="subject" name="subject" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><span class="t-fr">Envoyer</span><span class="t-en">Send</span></button>
+        </form>
+
+        <p class="callout" style="margin-top: 1.5rem;">
+          <span class="t-fr">Ce formulaire ouvre votre client courriel pour l'instant. À connecter à un service d'envoi (Formspree, backend, etc.) avant la mise en ligne.</span>
+          <span class="t-en">This form currently opens your email client. Connect it to a mail-sending service (Formspree, a backend, etc.) before going live.</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">HENI</div>
+          <p class="footer-tagline">
+            <span class="t-fr">Cuisine méditerranéenne de saison et vins naturels, au cœur de Montréal.</span>
+            <span class="t-en">Seasonal Mediterranean cooking and natural wine, in the heart of Montreal.</span>
+          </p>
+          <div class="social-row">
+            <a href="https://instagram.com/heni.restaurant" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4><span class="t-fr">Naviguer</span><span class="t-en">Explore</span></h4>
+          <ul>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html"><span class="t-fr">À propos</span><span class="t-en">About</span></a></li>
+            <li><a href="gallery.html"><span class="t-fr">Galerie</span><span class="t-en">Gallery</span></a></li>
+            <li><a href="reservations.html"><span class="t-fr">Réservations</span><span class="t-en">Reservations</span></a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4><span class="t-fr">Heures</span><span class="t-en">Hours</span></h4>
+          <ul>
+            <li><span class="t-fr">Mer – Sam</span><span class="t-en">Wed – Sat</span> · 17h00 – 22h00</li>
+            <li><span class="t-fr">Dim – Mar</span><span class="t-en">Sun – Tue</span> · <span class="t-fr">Fermé</span><span class="t-en">Closed</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li>123 Rue Placeholder, Montréal, QC</li>
+            <li><a href="tel:+15140000000">(514) 000-0000</a></li>
+            <li><a href="mailto:bonjour@heni.restaurant">bonjour@heni.restaurant</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="footer-year"></span> Heni. <span class="t-fr">Tous droits réservés.</span><span class="t-en">All rights reserved.</span></span>
+        <span><span class="t-fr">Site à titre indicatif — contenu et photos à venir.</span><span class="t-en">Placeholder site — content and photography coming soon.</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
