@@ -381,6 +381,37 @@ body:not(.is-home) .site-header {
   background: var(--color-ink);
 }
 
+/* Hero photograph, with a scrim so the type stays readable over it */
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity var(--ease) 1.2s, transform var(--ease) 8s;
+}
+
+.hero-media img.is-loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 19, 16, 0.75) 0%, rgba(20, 19, 16, 0.35) 35%, rgba(20, 19, 16, 0.85) 100%),
+    radial-gradient(90% 70% at 50% 45%, rgba(20, 19, 16, 0.15) 0%, rgba(20, 19, 16, 0.7) 100%);
+}
+
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -483,8 +514,8 @@ body:not(.is-home) .site-header {
 }
 
 /* ==========================================================================
-   Placeholder photography — tasteful gradient blocks standing in
-   for real photography, swap out via <img> when assets are ready
+   Photography — real photos drop into assets/img/ and layer over the
+   gradient block, which stays behind as a fallback if a file is missing
    ========================================================================== */
 
 .ph {
@@ -511,6 +542,32 @@ body:not(.is-home) .site-header {
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
+}
+
+/* The photo itself — covers the gradient once it loads */
+.ph img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--ease) 0.7s, transform var(--ease) 0.9s;
+}
+
+.ph img.is-loaded {
+  opacity: 1;
+}
+
+/* Once a real photo is in, drop the decorative texture behind it */
+.ph.has-photo::before {
+  display: none;
+}
+
+/* Slow zoom on hover, gallery and grid tiles only */
+.gallery-grid .ph:hover img.is-loaded,
+.grid .ph:hover img.is-loaded {
+  transform: scale(1.04);
 }
 
 .ph--green { background: radial-gradient(130% 95% at 28% 18%, var(--color-green) 0%, var(--color-green-deep) 48%, var(--color-ink) 100%); }

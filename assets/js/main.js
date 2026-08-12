@@ -19,6 +19,11 @@
     if (document.body.dataset[titleKey]) {
       document.title = document.body.dataset[titleKey];
     }
+
+    document.querySelectorAll("img[data-alt-fr]").forEach(function (img) {
+      var alt = lang === "fr" ? img.dataset.altFr : img.dataset.altEn;
+      if (alt) img.setAttribute("alt", alt);
+    });
   }
 
   function initLang() {
@@ -72,6 +77,31 @@
     }
   }
 
+  function initPhotos() {
+    document.querySelectorAll(".ph img, .hero-media img").forEach(function (img) {
+      function onLoad() {
+        img.classList.add("is-loaded");
+        var frame = img.closest(".ph");
+        if (frame) frame.classList.add("has-photo");
+      }
+
+      function onError() {
+        // File not in assets/img/ yet — remove the <img> so the gradient
+        // block underneath shows through instead of a broken-image icon.
+        img.remove();
+      }
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) onLoad();
+        else onError();
+        return;
+      }
+
+      img.addEventListener("load", onLoad);
+      img.addEventListener("error", onError);
+    });
+  }
+
   function initFooterYear() {
     var el = document.getElementById("footer-year");
     if (el) el.textContent = new Date().getFullYear();
@@ -80,6 +110,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initLang();
     initHeader();
+    initPhotos();
     initFooterYear();
   });
 })();
