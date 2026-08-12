@@ -78,27 +78,39 @@
   }
 
   function initPhotos() {
-    document.querySelectorAll(".ph img, .hero-media img").forEach(function (img) {
-      function onLoad() {
-        img.classList.add("is-loaded");
-        var frame = img.closest(".ph");
-        if (frame) frame.classList.add("has-photo");
-      }
+    var photos = document.querySelectorAll(".ph img, .hero-media img");
 
-      function onError() {
-        // File not in assets/img/ yet — remove the <img> so the gradient
-        // block underneath shows through instead of a broken-image icon.
-        img.remove();
-      }
+    function onLoad(img) {
+      img.classList.add("is-loaded");
+      var frame = img.closest(".ph");
+      if (frame) frame.classList.add("has-photo");
+    }
 
-      if (img.complete) {
-        if (img.naturalWidth > 0) onLoad();
-        else onError();
-        return;
-      }
+    function onError(img) {
+      // File not in assets/img/ yet — remove the <img> so the gradient
+      // block underneath shows through instead of a broken-image icon.
+      img.remove();
+    }
 
-      img.addEventListener("load", onLoad);
-      img.addEventListener("error", onError);
+    // Resolve an image if the browser has already finished with it. Called on
+    // the load/error events and again on window load, because a lazy image can
+    // finish between our checks and never deliver an event we hear — leaving it
+    // stuck at opacity 0 over its own gradient.
+    function settle(img) {
+      if (!img.isConnected || img.classList.contains("is-loaded")) return;
+      if (!img.complete) return;
+      if (img.naturalWidth > 0) onLoad(img);
+      else onError(img);
+    }
+
+    photos.forEach(function (img) {
+      img.addEventListener("load", function () { onLoad(img); });
+      img.addEventListener("error", function () { onError(img); });
+      settle(img);
+    });
+
+    window.addEventListener("load", function () {
+      photos.forEach(settle);
     });
   }
 
