@@ -22,6 +22,22 @@ before, so the site never shows a broken image.
 | `set-table.jpg`      | Gallery (wide tile)                       | wide         | 1800 × 1200    |
 | `dessert.jpg`        | Gallery                                   | portrait 4:5 | 1200 × 1500    |
 
+## Generated files
+
+Anything with a width in its name — `hero-768.jpg`, `dining-room-1200.jpg`,
+`hero-portrait-706.jpg` — is produced by `build-images.py`. Don't edit those
+by hand; drop in the full-size original and re-run:
+
+```
+python3 build-images.py       # responsive widths + the hero's portrait crop
+python3 build-standalone.py   # rebuild the single-file demo
+```
+
+`hero-portrait-*.jpg` is a 3:4 centre crop of the hero. The full-width
+photograph carries its own centred wordmark, and a 16:9 image in a tall phone
+viewport crops to the middle 26% — enough to cut `HENI` down to `HEN`. The
+markup serves the portrait crop to any viewport taller than it is wide.
+
 ## Notes
 
 - **The hero.** `hero.jpg` is the long set table with flowers, shot against the

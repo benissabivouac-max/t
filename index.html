@@ -33,10 +33,21 @@
   <main>
     <section class="hero hero--bare">
       <div class="hero-media">
-        <img src="assets/img/hero.jpg" alt="Une longue table dressée chez Heni, fleurs et couverts, devant la banquette de velours et le mur de brique"
-             data-alt-fr="Une longue table dressée chez Heni, fleurs et couverts, devant la banquette de velours et le mur de brique"
-             data-alt-en="A long table set at Heni, flowers and place settings, against the velvet banquette and brick wall"
-             fetchpriority="high" decoding="async" />
+        <picture>
+          <!-- Any portrait viewport gets a 3:4 crop: the 16:9 original loses
+               its wordmark to the sides when the window is taller than wide.
+               Keyed on shape, not width, so tablets are covered too. -->
+          <source media="(max-aspect-ratio: 1/1)"
+                  srcset="assets/img/hero-portrait-480.jpg 480w, assets/img/hero-portrait-706.jpg 706w"
+                  sizes="100vw" />
+          <source srcset="assets/img/hero-768.jpg 768w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero.jpg 1672w"
+                  sizes="100vw" />
+          <img src="assets/img/hero.jpg" alt="Une longue table dressée chez Heni, fleurs et couverts, devant la banquette de velours et le mur de brique"
+               data-alt-fr="Une longue table dressée chez Heni, fleurs et couverts, devant la banquette de velours et le mur de brique"
+               data-alt-en="A long table set at Heni, flowers and place settings, against the velvet banquette and brick wall"
+               width="1672" height="941"
+               fetchpriority="high" decoding="async" srcset="assets/img/hero-480.jpg 480w, assets/img/hero-768.jpg 768w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero.jpg 1672w" sizes="100vw" />
+        </picture>
       </div>
       <a href="#evenement" class="hero-scroll" aria-label="Scroll">
         <span class="t-fr">Découvrir</span><span class="t-en">Discover</span>
@@ -49,7 +60,7 @@
              alt="La salle à la tombée du soir : étagère de vins natures, lampe allumée et fenêtre donnant sur la rue"
              data-alt-fr="La salle à la tombée du soir : étagère de vins natures, lampe allumée et fenêtre donnant sur la rue"
              data-alt-en="The room at nightfall: a shelf of natural wines, a lit lamp and the window onto the street"
-             loading="lazy" decoding="async" />
+             loading="lazy" decoding="async" srcset="assets/img/dining-room-480.jpg 480w, assets/img/dining-room-768.jpg 768w, assets/img/dining-room-1200.jpg 1200w, assets/img/dining-room-1600.jpg 1600w, assets/img/dining-room.jpg 1672w" sizes="100vw" />
         <div class="ph-label">
           <strong><span class="t-fr">La salle</span><span class="t-en">The Room</span></strong>
           <span class="t-fr">Le mur de vins natures, à la tombée du soir</span><span class="t-en">The natural wine wall, at nightfall</span>
@@ -82,7 +93,7 @@
                alt="Affiche : Cabane à sucre halal, chef invité François-Philippe Gauthier"
                data-alt-fr="Affiche : Cabane à sucre halal, chef invité François-Philippe Gauthier"
                data-alt-en="Poster: Halal sugar shack dinner, guest chef François-Philippe Gauthier"
-               loading="lazy" decoding="async" />
+               loading="lazy" decoding="async" srcset="assets/img/event-cabane-a-sucre-480.jpg 480w, assets/img/event-cabane-a-sucre-768.jpg 768w, assets/img/event-cabane-a-sucre.jpg 1170w" sizes="(max-width: 960px) 92vw, 40vw" />
         </div>
         <div class="event-meta">
           <span class="event-past">
@@ -126,7 +137,7 @@
              alt="Une viande glacée, tranchée et dressée sur une assiette en céramique claire"
              data-alt-fr="Une viande glacée, tranchée et dressée sur une assiette en céramique claire"
              data-alt-en="Glazed meat, sliced and plated on a pale ceramic dish"
-             loading="lazy" decoding="async" />
+             loading="lazy" decoding="async" srcset="assets/img/seasonal-plate-480.jpg 480w, assets/img/seasonal-plate-768.jpg 768w, assets/img/seasonal-plate.jpg 1170w" sizes="100vw" />
         <div class="ph-label">
           <strong><span class="t-fr">Viande glacée</span><span class="t-en">Glazed Meat</span></strong>
           <span class="t-fr">Au passe, entre deux services</span><span class="t-en">At the pass, between services</span>

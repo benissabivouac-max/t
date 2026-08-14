@@ -31,10 +31,60 @@ def slice_between(text, start, end):
     return text[i:j]
 
 
-def inline_images(html, cache):
-    """Swap src="assets/img/x.jpg" for a data URI, or drop the <img> if absent."""
+# Embedding every responsive width would multiply the file size for no gain,
+# so each image collapses to one variant: large enough for a laptop, small
+# enough to keep the bundle sane.
+STANDALONE_MAX_WIDTH = 1200
 
-    def repl(match):
+
+def pick_variant(path):
+    """Prefer a generated width variant at or under the cap, else the original."""
+    base, ext = os.path.splitext(path)
+    best, best_w = path, 10 ** 9
+    for candidate in sorted(os.listdir(os.path.dirname(path) or ".")):
+        m = re.fullmatch(re.escape(os.path.basename(base)) + r"-(\d+)" + re.escape(ext), candidate)
+        if not m:
+            continue
+        w = int(m.group(1))
+        if w <= STANDALONE_MAX_WIDTH and (best == path or w > best_w or best_w > STANDALONE_MAX_WIDTH):
+            best, best_w = os.path.join(os.path.dirname(path), candidate), w
+    return best
+
+
+def first_src(srcset):
+    """Largest candidate in a srcset that is still within the cap."""
+    best, best_w = None, -1
+    for part in srcset.split(","):
+        bits = part.strip().split()
+        if not bits:
+            continue
+        url = bits[0]
+        w = int(bits[1][:-1]) if len(bits) > 1 and bits[1].endswith("w") else 0
+        if w <= STANDALONE_MAX_WIDTH and w > best_w and os.path.exists(url):
+            best, best_w = url, w
+    return best
+
+
+def inline_images(html, cache):
+    """Collapse <picture>/srcset to one embedded image; drop <img> with no file."""
+
+    def uri(path):
+        if path not in cache:
+            cache[path] = data_uri(path)
+        return cache[path]
+
+    def do_source(match):
+        tag = match.group(0)
+        srcset = re.search(r'srcset="([^"]+)"', tag)
+        if not srcset:
+            return tag
+        chosen = first_src(srcset.group(1))
+        if not chosen:
+            return ""  # nothing usable: let the next source or the img win
+        tag = re.sub(r'srcset="[^"]+"', f'srcset="{uri(chosen)}"', tag)
+        return re.sub(r'\s*sizes="[^"]*"', "", tag)
+
+    def do_img(match):
         tag = match.group(0)
         src = re.search(r'src="(assets/img/[^"]+)"', tag)
         if not src:
@@ -42,11 +92,12 @@ def inline_images(html, cache):
         path = src.group(1)
         if not os.path.exists(path):
             return ""  # no file: let the gradient placeholder stand alone
-        if path not in cache:
-            cache[path] = data_uri(path)
-        return tag.replace(src.group(1), cache[path])
+        tag = re.sub(r'\s*srcset="[^"]*"', "", tag)
+        tag = re.sub(r'\s*sizes="[^"]*"', "", tag)
+        return tag.replace(path, uri(pick_variant(path)))
 
-    return re.sub(r"<img\b[^>]*?/?>", repl, html, flags=re.S)
+    html = re.sub(r"<source\b[^>]*?/?>", do_source, html, flags=re.S)
+    return re.sub(r"<img\b[^>]*?/?>", do_img, html, flags=re.S)
 
 
 def main():

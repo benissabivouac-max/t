@@ -1194,6 +1194,35 @@ body:not(.is-home) .site-header {
   .showcase .c4, .showcase .c6 { grid-column: span 2; }
 }
 
+/* Portrait viewports take the hero's 3:4 crop shape, so the wordmark inside
+   the photograph is never cut. Matched to the <picture> source, which swaps
+   to that crop on shape rather than width — a portrait tablet needs it as
+   much as a phone. */
+@media (max-width: 700px), (max-width: 1024px) and (orientation: portrait) {
+  .hero {
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Phones also lose the cinematic band ratio, which would otherwise leave a
+   170px letterbox slot. */
+@media (max-width: 700px) {
+  .band {
+    --ph-ratio: 4 / 3;
+  }
+
+  .band .ph {
+    min-height: 0;
+  }
+
+  /* The shortened hero already shows the next section, so the scroll cue is
+     redundant — and it lands on top of the photograph's own contact line. */
+  .hero-scroll {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
