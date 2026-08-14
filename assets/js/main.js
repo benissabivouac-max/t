@@ -78,7 +78,7 @@
   }
 
   function initPhotos() {
-    var photos = document.querySelectorAll(".ph img, .hero-media img");
+    var photos = document.querySelectorAll(".ph img, .hero-media img, .event-poster img");
 
     function onLoad(img) {
       img.classList.add("is-loaded");
