@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var LANG_KEY = "heni-lang";
+  var LANG_KEY = "site-lang";
   var html = document.documentElement;
 
   // Flag the document before first paint so the reveal's hidden state applies

@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galerie — Heni</title>
-  <meta name="description" content="La galerie photo du restaurant Heni à Montréal — salle, cuisine, assiettes de saison et cave à vin." />
+  <title>Galerie — Nom du restaurant</title>
+  <meta name="description" content="Galerie d'un modèle de site pour restaurant — emplacements photo à remplir." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body data-title-fr="Galerie — Heni" data-title-en="Gallery — Heni">
+<body data-title-fr="Galerie — Nom du restaurant" data-title-en="Gallery — Restaurant Name">
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">HENI</a>
+      <a href="index.html" class="logo">RESTAURANT</a>
       <nav class="main-nav" id="main-nav">
         <a href="index.html"><span class="t-fr">Accueil</span><span class="t-en">Home</span></a>
         <a href="about.html"><span class="t-fr">À propos</span><span class="t-en">About</span></a>
@@ -22,7 +22,7 @@
       </nav>
       <div class="header-actions">
         <button class="lang-toggle" id="lang-toggle" type="button">EN</button>
-        <a href="mailto:bonjour@heni.restaurant?subject=R%C3%A9servation" class="btn btn-primary"><span class="t-fr">Réserver</span><span class="t-en">Reserve</span></a>
+        <a href="mailto:contact@votre-restaurant.com?subject=R%C3%A9servation" class="btn btn-primary"><span class="t-fr">Réserver</span><span class="t-en">Reserve</span></a>
         <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -36,8 +36,8 @@
         <span class="eyebrow"><span class="t-fr">L'atmosphère</span><span class="t-en">The Atmosphere</span></span>
         <h1><span class="t-fr">Galerie</span><span class="t-en">Gallery</span></h1>
         <p class="hero-lede" style="margin-inline:auto;">
-          <span class="t-fr">La salle, la cuisine ouverte, le pain du jour et la cave — quelques images de Heni entre deux services.</span>
-          <span class="t-en">The room, the open kitchen, the bread of the day and the cellar — a few images of Heni between services.</span>
+          <span class="t-fr">La salle, la cuisine, les assiettes. Chaque case est un emplacement : déposez vos images dans assets/img et elles prennent la place des panneaux.</span>
+          <span class="t-en">The room, the kitchen, the plates. Every cell is a slot: drop your images into assets/img and they take the place of the panels.</span>
         </p>
       </div>
     </section>
@@ -46,54 +46,32 @@
       <div class="container">
         <div class="gallery-grid">
           <div class="ph ph--green g-wide g-tall">
-            <img src="assets/img/dining-room.jpg" alt="La salle à manger" data-alt-fr="La salle à manger" data-alt-en="The dining room" loading="lazy" decoding="async" srcset="assets/img/dining-room-480.jpg 480w, assets/img/dining-room-768.jpg 768w, assets/img/dining-room-1200.jpg 1200w, assets/img/dining-room-1600.jpg 1600w, assets/img/dining-room.jpg 1672w" sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw" />
-            <div class="ph-label"><strong><span class="t-fr">Salle à manger</span><span class="t-en">Dining Room</span></strong></div>
+            <img src="assets/img/dining-room.jpg" alt="La salle" data-alt-fr="La salle" data-alt-en="The dining room" loading="lazy" decoding="async" srcset="assets/img/dining-room-480.jpg 480w, assets/img/dining-room-768.jpg 768w, assets/img/dining-room-1200.jpg 1200w, assets/img/dining-room-1600.jpg 1600w, assets/img/dining-room.jpg 1672w" sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw" />
+            <div class="ph-label"><strong><span class="t-fr">La salle</span><span class="t-en">The dining room</span></strong></div>
           </div>
           <div class="ph ph--ink">
-            <img src="assets/img/counter.jpg" alt="Le comptoir" data-alt-fr="Le comptoir" data-alt-en="The counter" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Comptoir</span><span class="t-en">The Counter</span></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
           <div class="ph ph--gold">
-            <img src="assets/img/bread.jpg" alt="Le pain du jour" data-alt-fr="Le pain du jour" data-alt-en="The bread of the day" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Pain du jour</span><span class="t-en">Bread of the Day</span></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
           <div class="ph ph--wood g-tall">
-            <img src="assets/img/wine-cellar.jpg" alt="La cave à vin" data-alt-fr="La cave à vin" data-alt-en="The wine cellar" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Cave à vin</span><span class="t-en">Wine Cellar</span></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
           <div class="ph ph--green">
-            <img src="assets/img/seasonal-plate.jpg" alt="Une assiette de saison" data-alt-fr="Une assiette de saison" data-alt-en="A seasonal plate" loading="lazy" decoding="async" srcset="assets/img/seasonal-plate-480.jpg 480w, assets/img/seasonal-plate-768.jpg 768w, assets/img/seasonal-plate.jpg 1170w" sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw" />
-            <div class="ph-label"><span class="t-fr">Assiette de saison</span><span class="t-en">Seasonal Plate</span></div>
+            <img src="assets/img/seasonal-plate.jpg" alt="Un plat" data-alt-fr="Un plat" data-alt-en="A dish" loading="lazy" decoding="async" srcset="assets/img/seasonal-plate-480.jpg 480w, assets/img/seasonal-plate-768.jpg 768w, assets/img/seasonal-plate.jpg 1170w" sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw" />
+            <div class="ph-label"><strong><span class="t-fr">Un plat</span><span class="t-en">A dish</span></strong></div>
           </div>
           <div class="ph ph--ink g-wide">
-            <img src="assets/img/kitchen.jpg" alt="En cuisine" data-alt-fr="En cuisine" data-alt-en="In the kitchen" loading="lazy" decoding="async" />
-            <div class="ph-label"><strong><span class="t-fr">En cuisine</span><span class="t-en">In the Kitchen</span></strong></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
           <div class="ph ph--gold">
-            <img src="assets/img/mouneh-jars.jpg" alt="Bocaux de mouneh" data-alt-fr="Bocaux de mouneh" data-alt-en="Jars of mouneh" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Bocaux de mouneh</span><span class="t-en">Mouneh Jars</span></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
           <div class="ph ph--wood">
-            <img src="assets/img/natural-wine.jpg" alt="Un verre de vin nature" data-alt-fr="Un verre de vin nature" data-alt-en="A glass of natural wine" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Verre de vin nature</span><span class="t-en">Glass of Natural Wine</span></div>
-          </div>
-          <div class="ph ph--green g-wide">
-            <img src="assets/img/set-table.jpg" alt="Une table dressée" data-alt-fr="Une table dressée" data-alt-en="A set table" loading="lazy" decoding="async" />
-            <div class="ph-label"><strong><span class="t-fr">Table dressée</span><span class="t-en">The Set Table</span></strong></div>
-          </div>
-          <div class="ph ph--ink">
-            <img src="assets/img/dessert.jpg" alt="Le dessert" data-alt-fr="Le dessert" data-alt-en="Dessert" loading="lazy" decoding="async" />
-            <div class="ph-label"><span class="t-fr">Dessert</span><span class="t-en">Dessert</span></div>
+            <div class="ph-label"><span class="t-fr">Emplacement photo</span><span class="t-en">Photo slot</span></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section section--green">
-      <div class="container section-head--center">
-        <span class="eyebrow"><span class="t-fr">Suivez-nous</span><span class="t-en">Follow Along</span></span>
-        <h2><span class="t-fr">Plus de photos sur Instagram</span><span class="t-en">More Photos on Instagram</span></h2>
-        <a href="https://instagram.com/heni.restaurant" target="_blank" rel="noopener" class="btn btn-primary">@heni.restaurant</a>
       </div>
     </section>
   </main>
@@ -102,13 +80,13 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-logo">HENI</div>
+          <div class="footer-logo">RESTAURANT</div>
           <p class="footer-tagline">
-            <span class="t-fr">Cuisine méditerranéenne de saison et vins naturels, au cœur de Montréal.</span>
-            <span class="t-en">Seasonal Mediterranean cooking and natural wine, in the heart of Montreal.</span>
+            <span class="t-fr">Une ligne de présentation — cuisine, ville, esprit de la maison.</span>
+            <span class="t-en">A one-line introduction — kitchen, city, spirit of the house.</span>
           </p>
           <div class="social-row">
-            <a href="https://instagram.com/heni.restaurant" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="Instagram">IG</a>
           </div>
         </div>
         <div class="footer-col">
@@ -116,7 +94,7 @@
           <ul>
             <li><a href="about.html"><span class="t-fr">À propos</span><span class="t-en">About</span></a></li>
             <li><a href="gallery.html"><span class="t-fr">Galerie</span><span class="t-en">Gallery</span></a></li>
-            <li><a href="mailto:bonjour@heni.restaurant?subject=R%C3%A9servation"><span class="t-fr">Réserver</span><span class="t-en">Reserve</span></a></li>
+            <li><a href="mailto:contact@votre-restaurant.com?subject=R%C3%A9servation"><span class="t-fr">Réserver</span><span class="t-en">Reserve</span></a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -129,15 +107,15 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <ul>
-            <li>123 Rue Placeholder, Montréal, QC</li>
-            <li><a href="tel:+15140000000">(514) 000-0000</a></li>
-            <li><a href="mailto:bonjour@heni.restaurant">bonjour@heni.restaurant</a></li>
+            <li><span class="t-fr">Adresse, Ville</span><span class="t-en">Address, City</span></li>
+            <li><a href="tel:+10000000000">+0 00 00 00 00</a></li>
+            <li><a href="mailto:contact@votre-restaurant.com">contact@votre-restaurant.com</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; <span id="footer-year"></span> Heni. <span class="t-fr">Tous droits réservés.</span><span class="t-en">All rights reserved.</span></span>
-        <span><span class="t-fr">Site de démonstration — contenu fictif.</span><span class="t-en">Demonstration site — fictional content.</span></span>
+        <span>&copy; <span id="footer-year"></span> <span class="t-fr">Nom du restaurant</span><span class="t-en">Restaurant Name</span>. <span class="t-fr">Tous droits réservés.</span><span class="t-en">All rights reserved.</span></span>
+        <span><span class="t-fr">Modèle de site — contenu de démonstration.</span><span class="t-en">Site template — demonstration content.</span></span>
       </div>
     </div>
   </footer>

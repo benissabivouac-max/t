@@ -9,7 +9,7 @@ pages become sections switched by hash routing rather than separate documents.
 Images that are not on disk have their <img> dropped at build time, so the
 gradient placeholder shows without a failed request.
 
-    python3 build-standalone.py  ->  heni-demo.html
+    python3 build-standalone.py  ->  restaurant-demo.html
 """
 
 import base64
@@ -17,7 +17,7 @@ import os
 import re
 
 PAGES = [("index.html", "home"), ("about.html", "about"), ("gallery.html", "gallery")]
-OUT = "heni-demo.html"
+OUT = "restaurant-demo.html"
 
 
 def data_uri(path):
@@ -162,8 +162,8 @@ def main():
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Heni — Restaurant méditerranéen, Montréal</title>
-  <meta name="description" content="Site de démonstration — Heni, cuisine méditerranéenne de saison et vins naturels à Montréal." />
+  <title>Nom du restaurant — Site de démonstration</title>
+  <meta name="description" content="Modèle de site pour restaurant — structure et contenu de démonstration à remplacer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -171,7 +171,7 @@ def main():
 {css}
   </style>
 </head>
-<body class="is-home" data-title-fr="Heni — Restaurant méditerranéen, Montréal" data-title-en="Heni — Mediterranean Restaurant, Montreal">
+<body class="is-home" data-title-fr="Nom du restaurant — Site de démonstration" data-title-en="Restaurant Name — Demonstration Site">
 
 {body}
 

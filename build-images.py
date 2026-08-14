@@ -7,10 +7,9 @@ Two jobs:
 1. Width variants (480/768/1200/1600) so a phone downloads a phone-sized file
    instead of the full-resolution original. Never upscales.
 
-2. A portrait crop of the hero. The hero photograph carries its own centred
-   HENI wordmark, and a 16:9 source inside a tall phone viewport crops to the
-   middle 26% — enough to cut the wordmark down to "HEN". The 3:4 crop keeps
-   the whole thing, and the markup serves it below 700px.
+2. A 3:4 portrait crop of the hero photograph. A 16:9 source inside a tall
+   phone viewport crops to the middle 26% of the frame, which throws away most
+   of the composition. The markup serves the crop to any portrait viewport.
 
     python3 build-images.py
 """
@@ -24,7 +23,7 @@ WIDTHS = (480, 768, 1200, 1600)
 QUALITY = 82
 
 # Photographs only — the README and any already-generated variant are skipped.
-BASES = ("hero", "dining-room", "seasonal-plate", "event-cabane-a-sucre")
+BASES = ("dining-room", "seasonal-plate")
 
 
 def save(im, path):
@@ -46,9 +45,12 @@ def variants(base):
         print(f"  {out:52} {w}x{h:<5} {size // 1024} KB")
 
 
+HERO = "dining-room"
+
+
 def hero_portrait():
-    """3:4 centre crop, wide enough to keep the full wordmark."""
-    src = f"{SRC}/hero.jpg"
+    """3:4 centre crop of the hero, for portrait viewports."""
+    src = f"{SRC}/{HERO}.jpg"
     if not os.path.exists(src):
         return
     im = Image.open(src).convert("RGB")
@@ -62,7 +64,7 @@ def hero_portrait():
         if w > crop.width:
             continue
         h = round(crop.height * w / crop.width)
-        out = f"{SRC}/hero-portrait-{w}.jpg"
+        out = f"{SRC}/{HERO}-portrait-{w}.jpg"
         size = save(crop.resize((w, h), Image.LANCZOS), out)
         print(f"  {out:52} {w}x{h:<5} {size // 1024} KB")
 
