@@ -765,6 +765,27 @@ body:not(.is-home) .site-header {
 }
 
 /* ==========================================================================
+   Text reveal — elements rise into place as their section is reached.
+   The hidden state is applied only once the script has added .js-reveal, so
+   the text stays visible if JavaScript never runs. The whole block is skipped
+   for readers who ask for reduced motion.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  html.js-reveal [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+/* ==========================================================================
    Timeline
    ========================================================================== */
 

@@ -4,6 +4,15 @@
   var LANG_KEY = "heni-lang";
   var html = document.documentElement;
 
+  // Flag the document before first paint so the reveal's hidden state applies
+  // without the text flashing in and back out.
+  if (
+    "IntersectionObserver" in window &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    html.classList.add("js-reveal");
+  }
+
   function applyLang(lang) {
     html.classList.remove("lang-en", "lang-fr");
     html.classList.add("lang-" + lang);
@@ -114,6 +123,72 @@
     });
   }
 
+  var REVEAL_SELECTOR = [
+    "main .eyebrow",
+    "main h1",
+    "main h2",
+    "main p",
+    "main .divider",
+    "main .btn",
+    "main .badge",
+    "main .event-past",
+    "main .pillar",
+    "main .timeline-item",
+    "main .info-list > div",
+    "main .ph-label"
+  ].join(", ");
+
+  function canReveal() {
+    return (
+      "IntersectionObserver" in window &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  function initReveal() {
+    if (!canReveal()) return;
+
+    var targets = [].slice.call(document.querySelectorAll(REVEAL_SELECTOR));
+
+    // Drop anything nested inside another target, so a card and its own
+    // heading do not animate twice at different moments.
+    targets = targets.filter(function (el) {
+      return !targets.some(function (other) {
+        return other !== el && other.contains(el);
+      });
+    });
+
+    // Stagger each element against its own section rather than the document,
+    // so a section reached late does not inherit a long delay.
+    var counts = {};
+    targets.forEach(function (el) {
+      var section = el.closest("section") || document.body;
+      if (!section.dataset.revealGroup) {
+        section.dataset.revealGroup = String(Object.keys(counts).length + 1);
+        counts[section.dataset.revealGroup] = 0;
+      }
+      var group = section.dataset.revealGroup;
+      var index = counts[group]++;
+      el.setAttribute("data-reveal", "");
+      el.style.setProperty("--reveal-delay", Math.min(index * 70, 420) + "ms");
+    });
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 }
+    );
+
+    targets.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
   function initFooterYear() {
     var el = document.getElementById("footer-year");
     if (el) el.textContent = new Date().getFullYear();
@@ -123,6 +198,7 @@
     initLang();
     initHeader();
     initPhotos();
+    initReveal();
     initFooterYear();
   });
 })();
