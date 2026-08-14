@@ -189,6 +189,61 @@
     });
   }
 
+  // Scale applied to parallax images; must match --ps in the stylesheet.
+  var PARALLAX_SCALE = 1.18;
+
+  function initParallax() {
+    if (!canReveal()) return;
+    // Phones skip it: the effect costs a repaint on every scroll frame and
+    // reads as jitter on a small screen rather than depth.
+    if (window.matchMedia("(max-width: 700px)").matches) return;
+
+    var images = [].slice.call(
+      document.querySelectorAll(".hero-media img, .band .ph img")
+    );
+    if (!images.length) return;
+
+    document.documentElement.classList.add("js-parallax");
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var viewport = window.innerHeight;
+
+      images.forEach(function (img) {
+        var frame = img.closest(".ph") || img.closest(".hero-media");
+        if (!frame) return;
+        var rect = frame.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > viewport + 200) return;
+
+        // Centre of the frame relative to centre of the screen, as -1..1.
+        var progress =
+          (rect.top + rect.height / 2 - viewport / 2) /
+          (viewport / 2 + rect.height / 2);
+        progress = Math.max(-1, Math.min(1, progress));
+
+        // Never travel further than the overflow the scale bought us, or the
+        // image would pull away from its frame and show the gradient behind.
+        var headroom = (rect.height * (PARALLAX_SCALE - 1)) / 2;
+        var shift = -progress * headroom * 0.85;
+
+        img.style.setProperty("--py", shift.toFixed(1) + "px");
+      });
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", update);
+    update();
+  }
+
   function initFooterYear() {
     var el = document.getElementById("footer-year");
     if (el) el.textContent = new Date().getFullYear();
@@ -199,6 +254,7 @@
     initHeader();
     initPhotos();
     initReveal();
+    initParallax();
     initFooterYear();
   });
 })();

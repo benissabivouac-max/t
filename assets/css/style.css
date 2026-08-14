@@ -389,18 +389,24 @@ body:not(.is-home) .site-header {
   overflow: hidden;
 }
 
+/* <picture> is inline by default, which leaves the img's height: 100% with no
+   definite parent to resolve against. */
+.hero-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity var(--ease) 1.2s, transform var(--ease) 8s;
+  transition: opacity var(--ease) 1.2s;
 }
 
 .hero-media img.is-loaded {
   opacity: 1;
-  transform: scale(1);
 }
 
 .hero-media::after {
@@ -556,7 +562,9 @@ body:not(.is-home) .site-header {
   background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
 }
 
-/* The photo itself — covers the gradient once it loads */
+/* The photo itself — covers the gradient once it loads.
+   --py is driven by the parallax script; the oversize scale gives it room to
+   travel without ever exposing an edge. */
 .ph img {
   position: absolute;
   inset: 0;
@@ -565,6 +573,18 @@ body:not(.is-home) .site-header {
   object-fit: cover;
   opacity: 0;
   transition: opacity var(--ease) 0.7s, transform var(--ease) 0.9s;
+}
+
+.band .ph img,
+.hero-media img {
+  transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1));
+  will-change: transform;
+}
+
+html.js-parallax .band .ph img,
+html.js-parallax .hero-media img {
+  --ps: 1.18;
+  transition: opacity var(--ease) 0.7s;
 }
 
 .ph img.is-loaded {

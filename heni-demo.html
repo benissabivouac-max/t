@@ -400,18 +400,24 @@ body:not(.is-home) .site-header {
   overflow: hidden;
 }
 
+/* <picture> is inline by default, which leaves the img's height: 100% with no
+   definite parent to resolve against. */
+.hero-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity var(--ease) 1.2s, transform var(--ease) 8s;
+  transition: opacity var(--ease) 1.2s;
 }
 
 .hero-media img.is-loaded {
   opacity: 1;
-  transform: scale(1);
 }
 
 .hero-media::after {
@@ -567,7 +573,9 @@ body:not(.is-home) .site-header {
   background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
 }
 
-/* The photo itself — covers the gradient once it loads */
+/* The photo itself — covers the gradient once it loads.
+   --py is driven by the parallax script; the oversize scale gives it room to
+   travel without ever exposing an edge. */
 .ph img {
   position: absolute;
   inset: 0;
@@ -576,6 +584,18 @@ body:not(.is-home) .site-header {
   object-fit: cover;
   opacity: 0;
   transition: opacity var(--ease) 0.7s, transform var(--ease) 0.9s;
+}
+
+.band .ph img,
+.hero-media img {
+  transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1));
+  will-change: transform;
+}
+
+html.js-parallax .band .ph img,
+html.js-parallax .hero-media img {
+  --ps: 1.18;
+  transition: opacity var(--ease) 0.7s;
 }
 
 .ph img.is-loaded {
@@ -1844,6 +1864,61 @@ body:not(.is-home) .site-header {
     });
   }
 
+  // Scale applied to parallax images; must match --ps in the stylesheet.
+  var PARALLAX_SCALE = 1.18;
+
+  function initParallax() {
+    if (!canReveal()) return;
+    // Phones skip it: the effect costs a repaint on every scroll frame and
+    // reads as jitter on a small screen rather than depth.
+    if (window.matchMedia("(max-width: 700px)").matches) return;
+
+    var images = [].slice.call(
+      document.querySelectorAll(".hero-media img, .band .ph img")
+    );
+    if (!images.length) return;
+
+    document.documentElement.classList.add("js-parallax");
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var viewport = window.innerHeight;
+
+      images.forEach(function (img) {
+        var frame = img.closest(".ph") || img.closest(".hero-media");
+        if (!frame) return;
+        var rect = frame.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > viewport + 200) return;
+
+        // Centre of the frame relative to centre of the screen, as -1..1.
+        var progress =
+          (rect.top + rect.height / 2 - viewport / 2) /
+          (viewport / 2 + rect.height / 2);
+        progress = Math.max(-1, Math.min(1, progress));
+
+        // Never travel further than the overflow the scale bought us, or the
+        // image would pull away from its frame and show the gradient behind.
+        var headroom = (rect.height * (PARALLAX_SCALE - 1)) / 2;
+        var shift = -progress * headroom * 0.85;
+
+        img.style.setProperty("--py", shift.toFixed(1) + "px");
+      });
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", update);
+    update();
+  }
+
   function initFooterYear() {
     var el = document.getElementById("footer-year");
     if (el) el.textContent = new Date().getFullYear();
@@ -1854,6 +1929,7 @@ body:not(.is-home) .site-header {
     initHeader();
     initPhotos();
     initReveal();
+    initParallax();
     initFooterYear();
   });
 })();
